@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Guide to Agile Methodologies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #0284c7; color: #0284c7; font-weight: 600; }
+        .tab-inactive { border-color: transparent; color: #475569; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .chart-container { position: relative; width: 100%; height: 320px; }
+        @media (min-width: 768px) { .chart-container { height: 400px; } }
+        .principle-card { transition: all 0.3s ease; }
+        .principle-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-700">
+
+    <div id="app" class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-800">An Interactive Guide to Agile</h1>
+            <p class="mt-2 text-lg text-slate-600">Explore the core concepts, methodologies, and principles of Agile development.</p>
+        </header>
+
+        <nav id="main-tabs" class="mb-8 border-b border-slate-200">
+            <ul class="flex flex-wrap -mb-px justify-center text-sm font-medium text-center">
+                <li class="mr-2"><button data-tab="welcome" class="inline-block p-4 border-b-2 rounded-t-lg tab-active">Welcome</button></li>
+                <li class="mr-2"><button data-tab="concepts" class="inline-block p-4 border-b-2 rounded-t-lg tab-inactive">Core Concepts</button></li>
+                <li class="mr-2"><button data-tab="methodologies" class="inline-block p-4 border-b-2 rounded-t-lg tab-inactive">Methodologies</button></li>
+                <li class="mr-2"><button data-tab="comparison" class="inline-block p-4 border-b-2 rounded-t-lg tab-inactive">Agile vs Waterfall</button></li>
+                <li class="mr-2"><button data-tab="adoption" class="inline-block p-4 border-b-2 rounded-t-lg tab-inactive">Adoption & Scaling</button></li>
+                <li class="mr-2"><button data-tab="special" class="inline-block p-4 border-b-2 rounded-t-lg tab-inactive">Specialized Contexts</button></li>
+                <li class="mr-2"><button data-tab="reference" class="inline-block p-4 border-b-2 rounded-t-lg tab-inactive">Quick Reference</button></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="welcome" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">What is Agile?</h2>
+                    <p class="mb-6 text-lg">Agile is an iterative approach to project management and software development that helps teams deliver value to their customers faster and with fewer headaches. Instead of a "big bang" launch, an agile team delivers work in small, but consumable, increments. Requirements, plans, and results are evaluated continuously so teams have a natural mechanism for responding to change quickly.</p>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">The Four Core Values</h3>
+                    <p class="mb-6">The Agile Manifesto is built on four core values. Interact with the cards below to see how they prioritize different aspects of development. This section helps you understand the foundational mindset of Agile, focusing on human interaction and adaptability over rigid processes.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                        <div class="p-6 bg-sky-100 rounded-lg principle-card">
+                            <h4 class="font-bold text-sky-800 text-xl">Individuals and interactions</h4>
+                            <span class="text-slate-500 my-2 block">over</span>
+                            <p class="text-slate-600">processes and tools</p>
+                        </div>
+                        <div class="p-6 bg-sky-100 rounded-lg principle-card">
+                            <h4 class="font-bold text-sky-800 text-xl">Working software</h4>
+                            <span class="text-slate-500 my-2 block">over</span>
+                            <p class="text-slate-600">comprehensive documentation</p>
+                        </div>
+                        <div class="p-6 bg-sky-100 rounded-lg principle-card">
+                            <h4 class="font-bold text-sky-800 text-xl">Customer collaboration</h4>
+                            <span class="text-slate-500 my-2 block">over</span>
+                            <p class="text-slate-600">contract negotiation</p>
+                        </div>
+                        <div class="p-6 bg-sky-100 rounded-lg principle-card">
+                            <h4 class="font-bold text-sky-800 text-xl">Responding to change</h4>
+                            <span class="text-slate-500 my-2 block">over</span>
+                            <p class="text-slate-600">following a plan</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="concepts" class="content-section">
+                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Agile's Core Concepts</h2>
+                    <p class="mb-8 text-lg">This section breaks down the fundamental ideas that power Agile methodologies. From iterative development cycles to the importance of a Minimum Viable Product (MVP), these concepts are the building blocks for creating adaptive and customer-focused products.</p>
+                    <div class="space-y-6">
+                        <div class="p-6 border border-slate-200 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-slate-800">Iterative Development & Incremental Delivery</h3>
+                            <p class="mt-2">Agile breaks down large projects into small, manageable cycles called iterations. At the end of each iteration, the team delivers a working piece of the product (an increment). This allows for frequent feedback and reduces risk by ensuring value is delivered early and often.</p>
+                        </div>
+                        <div class="p-6 border border-slate-200 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-slate-800">Minimum Viable Product (MVP)</h3>
+                            <p class="mt-2">The MVP is the version of a new product that allows a team to collect the maximum amount of validated learning about customers with the least effort. It's not about creating a minimal product; it's about starting a learning process quickly and efficiently.</p>
+                        </div>
+                         <div class="p-6 border border-slate-200 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-slate-800">Collaboration & Self-Organizing Teams</h3>
+                            <p class="mt-2">Agile emphasizes close collaboration between developers, stakeholders, and customers. Teams are self-organizing, meaning they have the autonomy to decide how to best accomplish their work, which fosters ownership, creativity, and motivation.</p>
+                        </div>
+                        <div class="p-6 border border-slate-200 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-slate-800">Adaptability & Feedback Loops</h3>
+                            <p class="mt-2">Continuous feedback is the engine of Agile. Regular events like reviews and retrospectives create structured opportunities to inspect progress and adapt plans. This ensures the team can respond to change effectively and continuously improve their process and product.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="methodologies" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Key Agile Methodologies</h2>
+                    <p class="mb-6 text-lg">Agile is an umbrella term for a set of frameworks and practices. This section provides a deep dive into the most popular methodologies. Use the buttons to explore Scrum, the most common framework, Kanban, a method focused on continuous flow, and other notable approaches.</p>
+                    
+                    <div id="methodology-tabs" class="mb-6 border-b border-slate-200">
+                        <button data-method="scrum" class="method-tab p-3 mr-2 font-medium bg-sky-600 text-white rounded-t-lg">Scrum</button>
+                        <button data-method="kanban" class="method-tab p-3 mr-2 font-medium bg-slate-200 text-slate-600 rounded-t-lg">Kanban</button>
+                        <button data-method="others" class="method-tab p-3 mr-2 font-medium bg-slate-200 text-slate-600 rounded-t-lg">Others</button>
+                    </div>
+
+                    <div id="scrum-content" class="method-content">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">Scrum Framework</h3>
+                        <p class="mb-6">Scrum helps teams work together. Much like a rugby team (where it gets its name) training for the big game, scrum encourages teams to learn through experiences, self-organize while working on a problem, and reflect on their wins and losses to continuously improve. It is structured around specific roles, events, and artifacts.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div>
+                                <h4 class="font-semibold text-lg text-sky-700">Roles</h4>
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li><strong>Product Owner:</strong> Defines the vision and prioritizes the work.</li>
+                                    <li><strong>Scrum Master:</strong> A servant-leader who facilitates the process and removes impediments.</li>
+                                    <li><strong>Development Team:</strong> A self-organizing, cross-functional team that does the work.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg text-sky-700">Artifacts</h4>
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li><strong>Product Backlog:</strong> The prioritized list of all desired features.</li>
+                                    <li><strong>Sprint Backlog:</strong> The set of tasks the team commits to for a sprint.</li>
+                                    <li><strong>Increment:</strong> The usable, "Done" product at the end of a sprint.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg text-sky-700">The Sprint</h4>
+                                <p class="mt-2">A time-boxed iteration (typically 1-4 weeks) where a "Done," usable, and potentially releasable product Increment is created. It's the heartbeat of Scrum.</p>
+                            </div>
+                        </div>
+                         <h4 class="font-semibold text-lg text-sky-700 mb-4 text-center">Scrum Events & Typical Duration (for a 1-month sprint)</h4>
+                         <div class="chart-container max-w-2xl mx-auto"><canvas id="scrumEventsChart"></canvas></div>
+                    </div>
+
+                    <div id="kanban-content" class="method-content" style="display: none;">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">Kanban Framework</h3>
+                        <p class="mb-6">Kanban is all about visualizing your work, limiting work in progress (WIP), and maximizing flow. It's a visual system for managing work as it moves through a process. Kanban is less prescriptive than Scrum and is excellent for teams that need to manage a continuous flow of tasks with varying priorities.</p>
+                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-lg text-sky-700">Core Principles</h4>
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li><strong>Visualize the workflow:</strong> Use a Kanban board to see all tasks.</li>
+                                    <li><strong>Limit Work-in-Progress (WIP):</strong> Focus on finishing, not just starting. This exposes bottlenecks.</li>
+                                    <li><strong>Manage Flow:</strong> Measure and optimize the flow of work.</li>
+                                    <li><strong>Make Policies Explicit:</strong> Everyone should understand the rules of the process.</li>
+                                    <li><strong>Improve Collaboratively:</strong> Use models & the scientific method to evolve.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                 <h4 class="font-semibold text-lg text-sky-700">Key Metrics</h4>
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li><strong>Lead Time:</strong> Total time from a request being made until it's delivered.</li>
+                                    <li><strong>Cycle Time:</strong> The time it takes for a task to move from "In Progress" to "Done."</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="others-content" class="method-content" style="display: none;">
+                         <h3 class="text-2xl font-bold text-slate-800 mb-4">Other Notable Frameworks</h3>
+                         <p class="mb-6">While Scrum and Kanban are the most common, other frameworks offer specialized practices. These show the flexibility of the Agile mindset, which can be adapted to focus on technical excellence, waste reduction, or human dynamics depending on the project's needs.</p>
+                         <div class="space-y-4">
+                             <div class="p-4 border border-slate-200 rounded-lg">
+                                <h4 class="font-semibold text-lg text-sky-700">Extreme Programming (XP)</h4>
+                                <p class="mt-1">Focuses on technical excellence and engineering practices like Pair Programming and Test-Driven Development (TDD) to produce high-quality code.</p>
+                             </div>
+                             <div class="p-4 border border-slate-200 rounded-lg">
+                                <h4 class="font-semibold text-lg text-sky-700">Lean Software Development</h4>
+                                <p class="mt-1">Adapts principles from lean manufacturing, centered on eliminating waste, amplifying learning, and delivering value as fast as possible.</p>
+                             </div>
+                             <div class="p-4 border border-slate-200 rounded-lg">
+                                <h4 class="font-semibold text-lg text-sky-700">Crystal</h4>
+                                <p class="mt-1">A family of methodologies that prioritizes people and interactions. It's highly adaptive, with different "colors" (Crystal Clear, Crystal Orange) for different project sizes and criticalities.</p>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="comparison" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Agile vs. Waterfall</h2>
+                    <p class="mb-8 text-lg">Understanding the difference between Agile and traditional "Waterfall" project management is key to choosing the right approach. This section provides a direct visual comparison of their core philosophies regarding flexibility, customer involvement, and risk management.</p>
+                    <div class="chart-container max-w-3xl mx-auto"><canvas id="agileVsWaterfallChart"></canvas></div>
+                    <div class="mt-8 text-center">
+                        <p class="text-slate-600"><strong>Use Agile for:</strong> Projects with evolving requirements, where speed and flexibility are key, and continuous customer feedback is valuable.</p>
+                        <p class="mt-2 text-slate-600"><strong>Use Waterfall for:</strong> Projects with fixed, well-understood requirements, where upfront planning and predictability are paramount, and scope changes are unlikely.</p>
+                    </div>
+                </div>
+            </section>
+
+             <section id="adoption" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Adoption, Challenges & Scaling</h2>
+                    <p class="mb-8 text-lg">Adopting Agile is more than just implementing new processes; it's a cultural shift. This section explores the benefits of Agile, the common challenges organizations face, and how Agile can be scaled for larger enterprises. The chart below visualizes the balance between benefits and potential hurdles.</p>
+                    <div class="chart-container max-w-2xl mx-auto"><canvas id="adoptionChart"></canvas></div>
+                     <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-slate-800 mb-3">Common Challenges</h3>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Cultural resistance to change.</li>
+                                <li>Lack of leadership buy-in and support.</li>
+                                <li>Over-reliance on tools instead of principles.</li>
+                                <li>Insufficient training and understanding.</li>
+                                <li>Difficulty in scaling across the organization.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-slate-800 mb-3">Scaling Frameworks</h3>
+                            <p class="mb-3">For large organizations, frameworks help apply Agile consistently:</p>
+                             <ul class="list-disc list-inside space-y-1">
+                                <li><strong>SAFe (Scaled Agile Framework):</strong> A comprehensive, prescriptive framework for large enterprises.</li>
+                                <li><strong>LeSS (Large-Scale Scrum):</strong> A framework that scales Scrum by keeping it as simple as possible.</li>
+                                <li><strong>Scrum@Scale:</strong> A lightweight framework to scale Scrum across an entire organization.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="special" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Agile in Specialized Contexts</h2>
+                    <p class="mb-8 text-lg">Agile's principles of iteration and adaptation are proving essential in complex, research-heavy fields. This section explores how Agile is uniquely suited to tackle the challenges of AI/Machine Learning and Robotics projects.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="p-6 bg-slate-100 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-slate-800 mb-3">🤖 Agile for AI & Machine Learning</h3>
+                            <p class="mb-4">AI/ML projects are inherently experimental. It's often impossible to know the best approach or predict model performance upfront. Agile provides a framework to manage this uncertainty.</p>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li><strong>Manages Uncertainty:</strong> Iterative cycles allow for constant experimentation with different models and data.</li>
+                                <li><strong>Data-Centric Focus:</strong> Agile accommodates the heavy emphasis on data preparation and cleaning.</li>
+                                <li><strong>MVAI (Minimum Viable AI):</strong> The concept of launching a simple, functional model first to gather real-world data and learn is a core Agile principle.</li>
+                                <li><strong>Feedback Loops:</strong> Continuous feedback is used to iteratively train and improve model accuracy.</li>
+                            </ul>
+                        </div>
+                        <div class="p-6 bg-slate-100 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-slate-800 mb-3">🦾 Agile for Robotics</h3>
+                            <p class="mb-4">Robotics combines the complexities of both hardware and software. Agile helps manage this integration and the challenges of physical-world testing.</p>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li><strong>Hardware/Software Integration:</strong> Modular design, encouraged by Agile, allows teams to work on components in parallel.</li>
+                                <li><strong>Physical Testing:</strong> Iterative prototyping and testing are crucial for safety and reliability. Feedback from sensors and simulations drives development.</li>
+                                <li><strong>Cross-Disciplinary Teams:</strong> Agile fosters the close collaboration required between mechanical, electrical, and software engineers.</li>
+                                <li><strong>Early Error Detection:</strong> Finding a hardware flaw late is extremely expensive. Agile's iterative approach helps find and fix these issues early.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="reference" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Quick Reference & Learning Aids</h2>
+                    <p class="mb-8 text-lg">Need a quick reminder or a simple way to explain Agile to someone new? This section provides a handy cheat sheet of key terms and a "For Dummies" guide that breaks down the core ideas using a simple analogy.</p>
+
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4">Agile Cheat Sheet</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
+                            <div class="p-4 bg-slate-100 rounded-lg">
+                                <h4 class="font-bold mb-2 text-slate-800">Key Terms</h4>
+                                <p><strong>Iteration/Sprint:</strong> A short, fixed-length work cycle.</p>
+                                <p><strong>Increment:</strong> The usable piece of product created in an iteration.</p>
+                                <p><strong>Backlog:</strong> A prioritized list of work.</p>
+                                <p><strong>WIP Limit:</strong> A Kanban rule to limit ongoing tasks to improve flow.</p>
+                                <p><strong>MVP/MVAI:</strong> The simplest functional version of a product for learning.</p>
+                            </div>
+                            <div class="p-4 bg-slate-100 rounded-lg">
+                                <h4 class="font-bold mb-2 text-slate-800">Scrum Roles</h4>
+                                <p><strong>Product Owner:</strong> Manages the backlog, represents the customer.</p>
+                                <p><strong>Scrum Master:</strong> Facilitates the process, removes blockers.</p>
+                                <p><strong>Dev Team:</strong> The self-organizing team that does the work.</p>
+                            </div>
+                            <div class="p-4 bg-slate-100 rounded-lg">
+                                <h4 class="font-bold mb-2 text-slate-800">Scrum Events</h4>
+                                <p><strong>Sprint Planning:</strong> Plan the upcoming sprint.</p>
+                                <p><strong>Daily Scrum:</strong> Daily 15-min sync.</p>
+                                <p><strong>Sprint Review:</strong> Inspect the increment with stakeholders.</p>
+                                <p><strong>Sprint Retrospective:</strong> Reflect on and improve the process.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4">Agile for Dummies</h3>
+                        <div class="p-6 bg-sky-50 border border-sky-200 rounded-lg">
+                            <p class="mb-4">Imagine building a LEGO castle. Instead of following a 100-page instruction booklet perfectly from start to finish (Waterfall), you decide to build it section by section (Agile).</p>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li><strong>Build the main gate first (Iteration).</strong> You show it to your friend (the customer).</li>
+                                <li><strong>They love it, but suggest adding a dragon (Feedback).</strong> The working gate is your first "increment."</li>
+                                <li><strong>You agree a dragon would be cool (Adaptability).</strong> You decide to build the dragon next instead of the tower you planned.</li>
+                                <li><strong>You learn that small bricks are better for the dragon's tail (Continuous Improvement).</strong></li>
+                            </ul>
+                            <p class="mt-4 font-semibold">That's Agile in a nutshell: building in small, usable pieces, listening to feedback, adapting to change, and learning as you go.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('#main-tabs button');
+            const sections = document.querySelectorAll('.content-section');
+            const methodologyTabs = document.querySelectorAll('#methodology-tabs button');
+            const methodologyContents = document.querySelectorAll('.method-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => {
+                        t.classList.remove('tab-active');
+                        t.classList.add('tab-inactive');
+                    });
+                    tab.classList.add('tab-active');
+                    tab.classList.remove('tab-inactive');
+
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+            
+            methodologyTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    methodologyTabs.forEach(t => {
+                       t.classList.remove('bg-sky-600', 'text-white');
+                       t.classList.add('bg-slate-200', 'text-slate-600');
+                    });
+                    tab.classList.add('bg-sky-600', 'text-white');
+                    tab.classList.remove('bg-slate-200', 'text-slate-600');
+                    
+                    methodologyContents.forEach(content => {
+                        content.style.display = 'none';
+                    });
+                    document.getElementById(tab.dataset.method + '-content').style.display = 'block';
+                });
+            });
+
+            const scrumEventsCtx = document.getElementById('scrumEventsChart').getContext('2d');
+            new Chart(scrumEventsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Sprint Planning', 'Daily Scrum', 'Sprint Review', 'Sprint Retrospective'],
+                    datasets: [{
+                        label: 'Max Duration (hours)',
+                        data: [8, 0.25, 4, 3],
+                        backgroundColor: ['#38bdf8', '#f87171', '#4ade80', '#fbbf24'],
+                        borderColor: ['#0284c7', '#dc2626', '#16a34a', '#d97706'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Maximum Duration of Scrum Events' }
+                    },
+                    scales: {
+                        x: { beginAtZero: true, title: { display: true, text: 'Hours' } },
+                        y: { grid: { display: false } }
+                    }
+                }
+            });
+
+            const agileVsWaterfallCtx = document.getElementById('agileVsWaterfallChart').getContext('2d');
+            new Chart(agileVsWaterfallCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Flexibility', 'Customer Involvement', 'Risk Mitigation', 'Upfront Planning'],
+                    datasets: [
+                        {
+                            label: 'Agile',
+                            data: [90, 85, 80, 30],
+                            backgroundColor: 'rgba(56, 189, 248, 0.7)',
+                            borderColor: '#0284c7',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Waterfall',
+                            data: [20, 25, 40, 95],
+                            backgroundColor: 'rgba(100, 116, 139, 0.7)',
+                            borderColor: '#475569',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                     plugins: {
+                        title: { display: true, text: 'Agile vs. Waterfall Characteristics Score (out of 100)' }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, max: 100, grid: { color: '#e2e8f0' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+
+            const adoptionCtx = document.getElementById('adoptionChart').getContext('2d');
+            new Chart(adoptionCtx, {
+                type: 'polarArea',
+                data: {
+                    labels: [
+                        'Customer Satisfaction', 'Adaptability', 'Team Morale', 'Faster Time-to-Market',
+                        'Cultural Resistance', 'Lack of Support', 'Scaling Difficulty'
+                    ],
+                    datasets: [{
+                        label: 'Impact',
+                        data: [85, 90, 75, 80, -70, -85, -65],
+                        backgroundColor: [
+                            'rgba(56, 189, 248, 0.7)',
+                            'rgba(74, 222, 128, 0.7)',
+                            'rgba(251, 191, 36, 0.7)',
+                            'rgba(167, 139, 250, 0.7)',
+                            'rgba(248, 113, 113, 0.7)',
+                            'rgba(248, 113, 113, 0.9)',
+                            'rgba(248, 113, 113, 0.5)'
+                        ]
+                    }]
+                },
+                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        title: { display: true, text: 'Key Benefits (Positive) vs. Challenges (Negative)' }
+                    },
+                    scales: {
+                        r: {
+                            pointLabels: {
+                                display: true,
+                                centerPointLabels: true,
+                                font: { size: 10 }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
